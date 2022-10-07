@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -17,7 +18,7 @@ public class Question {
 
     @Column(columnDefinition = "TEXT")
     private String content;
-    private LocalDateTime regDate;
+    private LocalDate regDate;
     private LocalDateTime updateDate;
 
     @ManyToOne

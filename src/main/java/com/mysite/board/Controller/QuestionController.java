@@ -7,14 +7,18 @@ import com.mysite.board.Repository.UserRepository;
 import com.mysite.board.Service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
 @RequestMapping("/question")
+@RestController
 public class QuestionController {
     @Autowired
     private QuestionRepository questionRepository;
@@ -41,7 +45,7 @@ public class QuestionController {
         User user = userRepository.findById(1).get();
 
         Question question = new Question();
-        question.setRegDate(LocalDateTime.now());
+        question.setRegDate(LocalDate.now());
         question.setUpdateDate(LocalDateTime.now());
         question.setTitle(title);
         question.setContent(content);
@@ -53,14 +57,12 @@ public class QuestionController {
     }
 
     // R 읽기 ==
-    @RequestMapping("/list")
-    @ResponseBody
+    @GetMapping("/list")
     public List<Question> showList(){
         return questionRepository.findAll();
     }
 
-    @RequestMapping("/detail")
-    @ResponseBody
+    @GetMapping("/detail")
     public Question getQuestion(Integer id){
         Question question = questionRepository.findById(id).get();
 
