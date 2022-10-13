@@ -1,4 +1,4 @@
-package com.mysite.board.Dto;
+package com.mysite.board.Domain;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.mysite.board.Dto;
+package com.mysite.board.Domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -19,10 +19,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(unique = true, nullable = false)
     private String memberId;
+
+    @Column(unique = true, nullable = false)
+    private String nickName;
+
     private String password;
     private String name;
-    private String nickName;
     private LocalDateTime regDate;
     private LocalDateTime updateDate;
     private Integer admin;

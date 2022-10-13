@@ -1,6 +1,7 @@
 package com.mysite.board.Controller;
 
-import com.mysite.board.Dto.UserCreateForm;
+import com.mysite.board.Domain.User;
+import com.mysite.board.Form.UserCreateForm;
 import com.mysite.board.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,11 +17,16 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/join")
-    public String getUser(@RequestBody UserCreateForm userCreateForm) {
-
+    public String join(@RequestBody UserCreateForm userCreateForm) {
         userService.join(userCreateForm);
 
         return "user";
     }
 
+    @PostMapping("/login")
+    public User login(@RequestBody User user){
+        User loginedUser = userService.login(user);
+
+        return loginedUser;
+    }
 }
