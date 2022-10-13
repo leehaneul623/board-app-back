@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity //DB 테이블 의미
+@Entity 
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

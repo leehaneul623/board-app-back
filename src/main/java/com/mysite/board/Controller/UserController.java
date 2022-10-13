@@ -24,8 +24,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public User login(@RequestBody User user){
-        User loginedUser = userService.login(user);
+    public UserCreateForm login(@RequestBody User user) throws Exception{
+        UserCreateForm loginedUser = userService.login(user);
 
         return loginedUser;
     }

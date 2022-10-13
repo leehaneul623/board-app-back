@@ -26,15 +26,21 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User login(User user) {
+    public UserCreateForm login(User user) throws Exception{
         Optional<User> opUser = userRepository.findByMemberId(user.getMemberId());
         if(opUser.isPresent()){
             User loginedUser = opUser.get();
             if(loginedUser.getPassword().equals(user.getPassword())){
-                return loginedUser;
+
+                UserCreateForm userCreateForm = new UserCreateForm(); //필요한 정보만 담아서 나가기
+                userCreateForm.setMemberId(loginedUser.getMemberId());
+                userCreateForm.setName(loginedUser.getName());
+                userCreateForm.setNickname(loginedUser.getNickName());
+
+                return userCreateForm;
             }
-                return null;
+            throw new Exception();
         }
-        return null;
+        throw new Exception();
     }
 }
