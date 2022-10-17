@@ -31,6 +31,8 @@ public class User {
     private LocalDateTime updateDate;
     private Integer admin;
 
-    @OneToMany(mappedBy = "member",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
     private List<Question> questionList;
+
+
 }

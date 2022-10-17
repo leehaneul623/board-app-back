@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -26,11 +27,13 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public UserCreateForm login(User user) throws Exception{
-        Optional<User> opUser = userRepository.findByMemberId(user.getMemberId());
+    public UserCreateForm login(Map<String,String> user) throws Exception{
+
+        Optional<User> opUser = userRepository.findByMemberId(user.get("memberId"));
+
         if(opUser.isPresent()){
             User loginedUser = opUser.get();
-            if(loginedUser.getPassword().equals(user.getPassword())){
+            if(loginedUser.getPassword().equals(user.get("password"))){
 
                 UserCreateForm userCreateForm = new UserCreateForm(); //필요한 정보만 담아서 나가기
                 userCreateForm.setMemberId(loginedUser.getMemberId());

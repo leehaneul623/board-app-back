@@ -2,16 +2,16 @@ package com.mysite.board.Controller;
 
 import com.mysite.board.Domain.Question;
 import com.mysite.board.Domain.User;
+import com.mysite.board.Form.QuestionForm;
 import com.mysite.board.Repository.QuestionRepository;
 import com.mysite.board.Repository.UserRepository;
 import com.mysite.board.Service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -49,11 +49,20 @@ public class QuestionController {
         question.setUpdateDate(LocalDateTime.now());
         question.setTitle(title);
         question.setContent(content);
-        question.setMember(user);
+        question.setUser(user);
 
         questionRepository.save(question);
 
         return "%d번 게시물 생성이 완료 되었습니다.".formatted(question.getId());
+    }
+
+    @PostMapping("/doWrite") //질문 작성
+    public String doWrite(@Valid QuestionForm questionForm, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "redirect/question/list";
+        }
+        this.questionService.doWrite(questionForm.getTitle(), questionForm.getContent());
+        return "redirect/question/list";
     }
 
     // R 읽기 ==

@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @RequiredArgsConstructor
 @Service
 public class QuestionService {
@@ -17,5 +19,11 @@ public class QuestionService {
         questionRepository.save(question);
     }
 
-
+    public void doWrite(String title, String content){
+        Question question = new Question();
+        question.setTitle(title);
+        question.setContent(content);
+        question.setRegDate(LocalDate.now());
+        this.questionRepository.save(question);
+    }
 }

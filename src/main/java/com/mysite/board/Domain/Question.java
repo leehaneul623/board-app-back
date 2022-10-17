@@ -22,6 +22,6 @@ public class Question {
     private LocalDateTime updateDate;
 
     @ManyToOne
-    private User member;
+    private User user;
 
 }

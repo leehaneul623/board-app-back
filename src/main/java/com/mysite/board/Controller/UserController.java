@@ -1,6 +1,5 @@
 package com.mysite.board.Controller;
 
-import com.mysite.board.Domain.User;
 import com.mysite.board.Form.UserCreateForm;
 import com.mysite.board.Service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -24,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public UserCreateForm login(@RequestBody User user) throws Exception{
+    public UserCreateForm login(@RequestBody Map<String,String> user) throws Exception{
         UserCreateForm loginedUser = userService.login(user);
 
         return loginedUser;

@@ -26,5 +26,5 @@ spring:
           type:
             descriptor:
               sql: trace
-  #    hibernate:
-  #      ddl-auto: update
+#      hibernate:
+#        ddl-auto: update
