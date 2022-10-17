@@ -20,8 +20,7 @@ public class UserService {
         user.setMemberId(userCreateForm.getMemberId());
         user.setPassword(userCreateForm.getPassword());
         user.setName(userCreateForm.getName());
-        user.setNickName(userCreateForm.getNickname());
-        user.setAdmin(1);
+        user.setNickname(userCreateForm.getNickname());
         user.setRegDate(LocalDateTime.now());
         user.setUpdateDate(LocalDateTime.now());
         userRepository.save(user);
@@ -38,7 +37,7 @@ public class UserService {
                 UserCreateForm userCreateForm = new UserCreateForm(); //필요한 정보만 담아서 나가기
                 userCreateForm.setMemberId(loginedUser.getMemberId());
                 userCreateForm.setName(loginedUser.getName());
-                userCreateForm.setNickname(loginedUser.getNickName());
+                userCreateForm.setNickname(loginedUser.getNickname());
 
                 return userCreateForm;
             }

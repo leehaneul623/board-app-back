@@ -21,5 +21,4 @@ public class UserCreateForm {
 
     private String name;
 
-
 }

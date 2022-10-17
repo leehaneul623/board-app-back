@@ -19,6 +19,7 @@ public class UserController {
 
     @PostMapping("/join")
     public String join(@RequestBody UserCreateForm userCreateForm) {
+        System.out.println("nickname: " + userCreateForm.getNickname());
         userService.join(userCreateForm);
 
         return "user";

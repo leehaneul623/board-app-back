@@ -23,13 +23,12 @@ public class User {
     private String memberId;
 
     @Column(unique = true, nullable = false)
-    private String nickName;
+    private String nickname;
 
     private String password;
     private String name;
     private LocalDateTime regDate;
     private LocalDateTime updateDate;
-    private Integer admin;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
     private List<Question> questionList;
