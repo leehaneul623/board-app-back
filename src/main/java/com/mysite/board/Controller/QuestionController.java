@@ -68,7 +68,7 @@ public class QuestionController {
 
 
     // U 수정 ==
-    @PutMapping("/modify/{postId}")
+    @PostMapping("/modify/{postId}")
     public String modify(@PathVariable Integer postId, @RequestBody QuestionForm questionForm){
         Question questionTemp = questionService.modify(postId, questionForm);
 
@@ -77,14 +77,11 @@ public class QuestionController {
 
 
     // D 삭제 ==
-    @RequestMapping("/delete")
-    @ResponseBody
-    public String delete(Integer id){
-        if(questionRepository.existsById(id) == false){
-            return "%d번 게시물은 이미 삭제 되었거나 존재하지 않습니다.".formatted(id);
-        }
-        questionRepository.deleteById(id);
+    @PostMapping("/delete/{postId}")
+    public String delete(@PathVariable Integer postId){
 
-        return "%d번 게시물이 삭제 되었습니다.".formatted(id);
+        questionService.deleteById(postId);
+
+        return "%d번 게시물이 삭제 되었습니다.".formatted(postId);
     }
 }

@@ -27,7 +27,7 @@ public class QuestionService {
     }
 
     // 게시글 내용 수정
-    public Question modify( Integer id, QuestionForm questionForm){
+    public Question modify(Integer id, QuestionForm questionForm){
         Question questionTemp = getQuestion(id);
 
         questionTemp.setTitle(questionForm.getTitle());
@@ -38,7 +38,11 @@ public class QuestionService {
         return questionTemp;
     }
 
+    public Question deleteById(Integer id) {
+        Question question = getQuestion(id);
 
+        questionRepository.deleteById(id);
 
-
+        return question;
+    }
 }
