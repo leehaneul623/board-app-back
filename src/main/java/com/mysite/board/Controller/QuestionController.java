@@ -7,16 +7,12 @@ import com.mysite.board.Repository.QuestionRepository;
 import com.mysite.board.Repository.UserRepository;
 import com.mysite.board.Service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Controller
 @RequestMapping("/question")
 @RestController
 public class QuestionController {
@@ -31,8 +27,8 @@ public class QuestionController {
 
     // C 생성 ==
     @RequestMapping("/write")
-    @ResponseBody
     public String write(String title, String content){
+        System.out.println(title);
         if(title == null || title.trim().length() == 0){
             return "제목을 입력해주세요.";
         }
@@ -53,16 +49,7 @@ public class QuestionController {
 
         questionRepository.save(question);
 
-        return "%d번 게시물 생성이 완료 되었습니다.".formatted(question.getId());
-    }
-
-    @PostMapping("/doWrite") //질문 작성
-    public String doWrite(@Valid QuestionForm questionForm, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            return "redirect/question/list";
-        }
-        this.questionService.doWrite(questionForm.getTitle(), questionForm.getContent());
-        return "redirect/question/list";
+        return "작성완료";
     }
 
     // R 읽기 ==
@@ -71,29 +58,21 @@ public class QuestionController {
         return questionRepository.findAll();
     }
 
-    @GetMapping("/detail")
-    public Question getQuestion(Integer id){
-        Question question = questionRepository.findById(id).get();
+    @GetMapping("/detail/{postId}")
+    public Question getQuestion(@PathVariable Integer postId){
+        Question question = questionRepository.findById(postId).get();
 
         return question;
     }
 
+
+
     // U 수정 ==
-    @RequestMapping("/modify")
-    @ResponseBody
-    public Question modify(Integer id, String title, String content){
+    @PutMapping("/modify/{postId}")
+    public String modify(@PathVariable Integer postId, @RequestBody QuestionForm questionForm){
+        Question questionTemp = questionService.modify(postId, questionForm);
 
-        Question question = questionRepository.findById(id).get(); //조건에 맞는 데이터 가져오기
-        if(title != null){
-            question.setTitle(title);
-        }
-        if(content != null){
-            question.setContent(content); // 불러온 데이터 수정
-        }
-        question.setUpdateDate(LocalDateTime.now());
-        questionRepository.save(question); // 수정된 데이터 DB에 저장
-
-        return question;
+        return "question !! ";
     }
 
 

@@ -1,12 +1,13 @@
 package com.mysite.board.Service;
 
 import com.mysite.board.Domain.Question;
+import com.mysite.board.Form.QuestionForm;
 import com.mysite.board.Repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -19,11 +20,25 @@ public class QuestionService {
         questionRepository.save(question);
     }
 
-    public void doWrite(String title, String content){
-        Question question = new Question();
-        question.setTitle(title);
-        question.setContent(content);
-        question.setRegDate(LocalDate.now());
-        this.questionRepository.save(question);
+    // 게시글 단건 가져오기
+    private Question getQuestion(Integer id) {
+        Optional<Question> question = this.questionRepository.findById(id);
+        return question.orElse(null);
     }
+
+    // 게시글 내용 수정
+    public Question modify( Integer id, QuestionForm questionForm){
+        Question questionTemp = getQuestion(id);
+
+        questionTemp.setTitle(questionForm.getTitle());
+        questionTemp.setContent(questionForm.getContent());
+
+        questionRepository.save(questionTemp);
+
+        return questionTemp;
+    }
+
+
+
+
 }

@@ -15,4 +15,9 @@ public class QuestionForm {
 
     @NotEmpty(message = "내용은 필수항목 입니다.")
     private String content;
+
+    public void updateQuestionForm(String title, String content){
+        this.title = getTitle();
+        this.content = getContent();
+    }
 }
