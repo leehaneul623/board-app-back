@@ -1,4 +1,4 @@
-package com.mysite.board.Domain;
+package com.mysite.board.Entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;

@@ -1,6 +1,6 @@
 package com.mysite.board.Repository;
 
-import com.mysite.board.Domain.Question;
+import com.mysite.board.Entity.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

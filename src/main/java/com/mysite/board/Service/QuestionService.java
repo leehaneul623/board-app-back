@@ -1,6 +1,6 @@
 package com.mysite.board.Service;
 
-import com.mysite.board.Domain.Question;
+import com.mysite.board.Entity.Question;
 import com.mysite.board.Form.QuestionForm;
 import com.mysite.board.Repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class QuestionService {
     }
 
     // 게시글 단건 가져오기
-    private Question getQuestion(Integer id) {
+    public Question getQuestion(Integer id) {
         Optional<Question> question = this.questionRepository.findById(id);
         return question.orElse(null);
     }
@@ -45,4 +45,6 @@ public class QuestionService {
 
         return question;
     }
+
+
 }

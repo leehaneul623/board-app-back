@@ -1,7 +1,7 @@
 package com.mysite.board.Controller;
 
-import com.mysite.board.Domain.Question;
-import com.mysite.board.Domain.User;
+import com.mysite.board.Entity.Question;
+import com.mysite.board.Entity.User;
 import com.mysite.board.Form.QuestionForm;
 import com.mysite.board.Repository.QuestionRepository;
 import com.mysite.board.Repository.UserRepository;

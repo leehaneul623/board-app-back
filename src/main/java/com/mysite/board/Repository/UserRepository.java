@@ -1,6 +1,6 @@
 package com.mysite.board.Repository;
 
-import com.mysite.board.Domain.User;
+import com.mysite.board.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

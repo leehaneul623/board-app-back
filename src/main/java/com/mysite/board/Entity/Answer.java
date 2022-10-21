@@ -1,4 +1,4 @@
-package com.mysite.board.Domain;
+package com.mysite.board.Entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,8 +13,15 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(unique = true, nullable = false)
+    private String nickName;
+
     private String memberId;
     private String content;
     private LocalDateTime regDate;
+
+    @ManyToOne
+    private Question question;
 
 }

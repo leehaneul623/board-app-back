@@ -1,6 +1,6 @@
 package com.mysite.board.Service;
 
-import com.mysite.board.Domain.User;
+import com.mysite.board.Entity.User;
 import com.mysite.board.Form.UserCreateForm;
 import com.mysite.board.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
