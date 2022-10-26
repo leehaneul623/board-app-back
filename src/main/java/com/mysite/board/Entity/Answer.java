@@ -14,10 +14,9 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true, nullable = false)
-    private String nickName;
+    @Column(name = "nickname", nullable = false)
+    private String nickname;
 
-    private String memberId;
     private String content;
     private LocalDateTime regDate;
 

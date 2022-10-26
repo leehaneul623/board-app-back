@@ -6,6 +6,8 @@ import com.mysite.board.Repository.AnswerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @Service
 public class AnswerService {
@@ -13,8 +15,10 @@ public class AnswerService {
 
     public void create(Question question, String nickName, String content){
         Answer answer = new Answer();
-        answer.setNickName(nickName);
+        answer.setNickname(nickName);
         answer.setContent(content);
+        answer.setRegDate(LocalDateTime.now());
+        answer.setQuestion(question);
 
         this.answerRepository.save(answer);
     }

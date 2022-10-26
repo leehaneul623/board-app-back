@@ -6,23 +6,21 @@ import com.mysite.board.Service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.Map;
+
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/answer")
 public class AnswerController {
     private final QuestionService questionService;
     private final AnswerService answerService;
 
-    @PostMapping("/create/{postId}")
-    public String createAnswer(Model model, @PathVariable("postId") Integer postId, String nickName ,String content){
-        Question question = this.questionService.getQuestion(postId);
-        this.answerService.create(question, nickName, content);
-
+    @PostMapping("/create/{id}")
+    public String createAnswer(@PathVariable("id") Integer id, @RequestBody Map<String, String> answer){
+        Question question = this.questionService.getQuestion(id);
+        this.answerService.create(question, answer.get("nickName"), answer.get("content"));
         return "생성완료";
     }
 }
