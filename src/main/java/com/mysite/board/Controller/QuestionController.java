@@ -7,6 +7,8 @@ import com.mysite.board.Repository.QuestionRepository;
 import com.mysite.board.Repository.UserRepository;
 import com.mysite.board.Service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -55,7 +57,14 @@ public class QuestionController {
     // R 읽기 ==
     @GetMapping("/list")
     public List<Question> showList(){
-        return questionRepository.findAll();
+        return questionService.findAll();
+    }
+
+    @GetMapping("/search")
+    public String search(String searchKeyword, Model model){
+        List<Question> questions = questionService.questionSearchList(searchKeyword);
+        model.addAttribute("questions", questions);
+        return "검색 완료";
     }
 
     @GetMapping("/detail/{postId}")
@@ -66,13 +75,12 @@ public class QuestionController {
     }
 
 
-
     // U 수정 ==
     @PostMapping("/modify/{postId}")
     public String modify(@PathVariable Integer postId, @RequestBody QuestionForm questionForm){
         Question questionTemp = questionService.modify(postId, questionForm);
 
-        return "question !! ";
+        return "수정 완료";
     }
 
 
@@ -84,4 +92,5 @@ public class QuestionController {
 
         return "%d번 게시물이 삭제 되었습니다.".formatted(postId);
     }
+
 }

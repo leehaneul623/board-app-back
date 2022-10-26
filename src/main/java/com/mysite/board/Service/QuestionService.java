@@ -5,8 +5,11 @@ import com.mysite.board.Form.QuestionForm;
 import com.mysite.board.Repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -17,14 +20,27 @@ public class QuestionService {
     private QuestionRepository questionRepository;
 
     public void write(Question question){
+
         questionRepository.save(question);
     }
+
+    // 게시글 리스트 조회
+    public List<Question> findAll() {
+        return this.questionRepository.findAll();
+    }
+
+    public List<Question> questionSearchList(String searchKeyword){
+        List<Question> questions = questionRepository.findByTitleContaining(searchKeyword);
+        return questions;
+    }
+
 
     // 게시글 단건 가져오기
     public Question getQuestion(Integer id) {
         Optional<Question> question = this.questionRepository.findById(id);
         return question.orElse(null);
     }
+
 
     // 게시글 내용 수정
     public Question modify(Integer id, QuestionForm questionForm){
@@ -45,6 +61,8 @@ public class QuestionService {
 
         return question;
     }
+
+
 
 
 }
