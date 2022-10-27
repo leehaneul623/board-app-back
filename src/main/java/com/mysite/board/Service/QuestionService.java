@@ -9,7 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -19,9 +22,14 @@ public class QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
-    public void write(Question question){
+    public void write(String title, String content) {
+        Question question = new Question();
+        question.setTitle(title);
+        question.setContent(content);
+        question.setRegDate(LocalDate.now());
+        question.setUpdateDate(LocalDateTime.now());
 
-        questionRepository.save(question);
+        this.questionRepository.save(question);
     }
 
     // 게시글 리스트 조회
@@ -40,7 +48,6 @@ public class QuestionService {
         Optional<Question> question = this.questionRepository.findById(id);
         return question.orElse(null);
     }
-
 
     // 게시글 내용 수정
     public Question modify(Integer id, QuestionForm questionForm){
@@ -61,8 +68,5 @@ public class QuestionService {
 
         return question;
     }
-
-
-
 
 }

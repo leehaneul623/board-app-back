@@ -28,28 +28,10 @@ public class QuestionController {
     private UserRepository userRepository;
 
     // C 생성 ==
-    @RequestMapping("/write")
-    public String write(String title, String content){
-        System.out.println(title);
-        if(title == null || title.trim().length() == 0){
-            return "제목을 입력해주세요.";
-        }
-        if(content == null || content.trim().length() == 0){
-            return "내용을 입력해주세요.";
-        }
+    @GetMapping("/write")
+    public String write(@RequestParam  String title, @RequestParam String content){
 
-        title = title.trim();
-        content = content.trim();
-        User user = userRepository.findById(1).get();
-
-        Question question = new Question();
-        question.setRegDate(LocalDate.now());
-        question.setUpdateDate(LocalDateTime.now());
-        question.setTitle(title);
-        question.setContent(content);
-        question.setUser(user);
-
-        questionRepository.save(question);
+        this.questionService.write(title, content);
 
         return "작성완료";
     }
@@ -69,7 +51,7 @@ public class QuestionController {
 
     @GetMapping("/detail/{postId}")
     public Question getQuestion(@PathVariable Integer postId){
-        Question question = questionRepository.findById(postId).get();
+        Question question = questionService.getQuestion(postId);
 
         return question;
     }
