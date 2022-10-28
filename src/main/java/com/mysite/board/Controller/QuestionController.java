@@ -43,10 +43,10 @@ public class QuestionController {
     }
 
     @GetMapping("/search")
-    public String search(String searchKeyword, Model model){
+    public List<Question> search(@RequestParam("keyword") String searchKeyword ){
         List<Question> questions = questionService.questionSearchList(searchKeyword);
-        model.addAttribute("questions", questions);
-        return "검색 완료";
+
+        return questions;
     }
 
     @GetMapping("/detail/{postId}")
