@@ -37,6 +37,11 @@ public class QuestionService {
         return this.questionRepository.findAll();
     }
 
+    public List<Question> findCategory(String category) {
+        List<Question> questionList = questionRepository.findByCategory(category).orElseGet(null);
+        return questionList;
+    }
+
     public List<Question> questionSearchList(String searchKeyword){
         List<Question> questions = questionRepository.findByTitleContaining(searchKeyword);
         return questions;
@@ -68,5 +73,6 @@ public class QuestionService {
 
         return question;
     }
+
 
 }

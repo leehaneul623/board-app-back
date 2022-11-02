@@ -42,6 +42,12 @@ public class QuestionController {
         return questionService.findAll();
     }
 
+    @GetMapping("/category")
+    public List<Question> categoryList(String category){
+        return questionService.findCategory(category);
+
+    }
+
     @GetMapping("/search")
     public List<Question> search(@RequestParam("keyword") String searchKeyword ){
         List<Question> questions = questionService.questionSearchList(searchKeyword);

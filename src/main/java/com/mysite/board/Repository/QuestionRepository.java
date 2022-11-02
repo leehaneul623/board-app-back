@@ -7,10 +7,12 @@ import org.springframework.stereotype.Repository;
 import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     List<Question> findByTitleContaining(String searchKeyword);
 
+    Optional<List<Question>> findByCategory(String category);
 }

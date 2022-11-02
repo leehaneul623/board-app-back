@@ -25,6 +25,7 @@ public class Question {
     private String content;
     private LocalDate regDate;
     private LocalDateTime updateDate;
+    private String category;
 
     @ManyToOne
     private User user;
