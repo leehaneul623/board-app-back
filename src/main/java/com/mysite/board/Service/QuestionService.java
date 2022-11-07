@@ -1,8 +1,10 @@
 package com.mysite.board.Service;
 
 import com.mysite.board.Entity.Question;
+import com.mysite.board.Entity.User;
 import com.mysite.board.Form.QuestionForm;
 import com.mysite.board.Repository.QuestionRepository;
+import com.mysite.board.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,12 +24,19 @@ public class QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
-    public void write(String title, String content) {
+    @Autowired
+    private UserRepository userRepository;
+
+    public void write(String title, String content, String category, String memberId) {
+        User user = userRepository.findByMemberId(memberId).get();
+
         Question question = new Question();
         question.setTitle(title);
         question.setContent(content);
+        question.setCategory(category);
         question.setRegDate(LocalDate.now());
         question.setUpdateDate(LocalDateTime.now());
+        question.setUser(user);
 
         this.questionRepository.save(question);
     }

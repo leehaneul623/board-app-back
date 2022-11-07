@@ -29,9 +29,9 @@ public class QuestionController {
 
     // C 생성 ==
     @GetMapping("/write")
-    public String write(@RequestParam  String title, @RequestParam String content){
+    public String write(@RequestParam  String title, @RequestParam String content, @RequestParam String category, @RequestParam String memberId){
 
-        this.questionService.write(title, content);
+        this.questionService.write(title, content, category, memberId);
 
         return "작성완료";
     }
