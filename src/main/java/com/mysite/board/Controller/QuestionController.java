@@ -1,18 +1,14 @@
 package com.mysite.board.Controller;
 
 import com.mysite.board.Entity.Question;
-import com.mysite.board.Entity.User;
 import com.mysite.board.Form.QuestionForm;
 import com.mysite.board.Repository.QuestionRepository;
 import com.mysite.board.Repository.UserRepository;
 import com.mysite.board.Service.QuestionService;
+import com.mysite.board.Dto.QuestionDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RequestMapping("/question")
@@ -38,7 +34,7 @@ public class QuestionController {
 
     // R 읽기 ==
     @GetMapping("/list")
-    public List<Question> showList(){
+    public List<QuestionDto> showList(){
         return questionService.findAll();
     }
 
