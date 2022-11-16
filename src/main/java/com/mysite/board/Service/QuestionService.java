@@ -52,13 +52,13 @@ public class QuestionService {
                 .collect(Collectors.toList());
     }
 
-    public List<Question> findCategory(String category) {
-        List<Question> questionList = questionRepository.findByCategory(category).orElseGet(null);
+    public List<QuestionDto> findCategory(String category) {
+        List<QuestionDto> questionList = questionRepository.findByCategory(category).orElseGet(null);
         return questionList;
     }
 
-    public List<Question> questionSearchList(String searchKeyword){
-        List<Question> questions = questionRepository.findByTitleContaining(searchKeyword);
+    public List<QuestionDto> questionSearchList(String searchKeyword){
+        List<QuestionDto> questions = questionRepository.findByTitleContaining(searchKeyword);
         return questions;
     }
 

@@ -1,11 +1,11 @@
 package com.mysite.board.Dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mysite.board.Entity.Answer;
 import com.mysite.board.Entity.Question;
 import lombok.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,6 +17,8 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class QuestionDto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
     private String content;
@@ -25,7 +27,7 @@ public class QuestionDto {
     private String category;
     private Integer memberId;
 
-
+    @OneToMany(mappedBy = "questionDto", cascade = CascadeType.REMOVE)
     private List<AnswerDto> answerList;
 
     public QuestionDto(Question question) {

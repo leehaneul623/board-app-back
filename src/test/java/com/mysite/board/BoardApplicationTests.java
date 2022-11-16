@@ -1,5 +1,6 @@
 package com.mysite.board;
 
+import com.mysite.board.Dto.QuestionDto;
 import com.mysite.board.Entity.Question;
 import com.mysite.board.Repository.QuestionRepository;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ class BoardApplicationTests {
 	private QuestionRepository questionRepository;
 	@Test
 	void contextLoads() {
-		List<Question> byTitleContaining = questionRepository.findByTitleContaining("444");
+		List<QuestionDto> byTitleContaining = questionRepository.findByTitleContaining("444");
 		System.out.println("title: " + byTitleContaining.get(0).getTitle());
 	}
 

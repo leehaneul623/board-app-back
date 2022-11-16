@@ -1,5 +1,6 @@
 package com.mysite.board.Repository;
 
+import com.mysite.board.Dto.QuestionDto;
 import com.mysite.board.Entity.Question;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
-    List<Question> findByTitleContaining(String searchKeyword);
+    List<QuestionDto> findByTitleContaining(String searchKeyword);
 
-    Optional<List<Question>> findByCategory(String category);
+    Optional<List<QuestionDto>> findByCategory(String category);
 }
