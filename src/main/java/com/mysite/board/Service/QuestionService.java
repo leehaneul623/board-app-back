@@ -63,6 +63,12 @@ public class QuestionService {
     }
 
 
+    public QuestionDto getQuestionDto(Integer id) {
+        Question question = this.questionRepository.findById(id).orElseThrow();
+        QuestionDto questionDto = new QuestionDto(question);
+        return questionDto;
+    }
+
     // 게시글 단건 가져오기
     public Question getQuestion(Integer id) {
         Optional<Question> question = this.questionRepository.findById(id);

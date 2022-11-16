@@ -52,8 +52,8 @@ public class QuestionController {
     }
 
     @GetMapping("/detail/{postId}")
-    public Question getQuestion(@PathVariable Integer postId){
-        Question question = questionService.getQuestion(postId);
+    public QuestionDto getQuestion(@PathVariable Integer postId){
+        QuestionDto question = questionService.getQuestionDto(postId);
 
         return question;
     }
