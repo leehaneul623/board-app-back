@@ -3,6 +3,7 @@ package com.mysite.board.Dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mysite.board.Entity.Answer;
 import com.mysite.board.Entity.Question;
+import com.mysite.board.Entity.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,11 +22,12 @@ public class QuestionDto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
+    @Column(columnDefinition = "TEXT")
     private String content;
     private LocalDate regDate;
     private LocalDateTime updateDate;
     private String category;
-    private Integer memberId;
+    private String memberId;
 
     @OneToMany(mappedBy = "questionDto", cascade = CascadeType.REMOVE)
     private List<AnswerDto> answerList;
@@ -37,7 +39,7 @@ public class QuestionDto {
         this.regDate = question.getRegDate();
         this.updateDate = question.getUpdateDate();
         this.category = question.getCategory();
-        this.memberId = question.getUser().getId();
+        this.memberId = question.getUser().getMemberId();
         this.answerList = new ArrayList<>();
         question.getAnswerList().stream()
                 .forEach(answer -> {
